@@ -35,6 +35,7 @@ impl Integral for usize {}
 impl<T: Read> VarRead for T {}
 impl<T: Write> VarWrite for T {}
 
+/// A supertrait of `Read` which adds ready-made methods for reading VarInts and VarStrings
 pub trait VarRead: Read {
     /// Attempts to read a VarInt from the stream, returning an error if there were issues reading
     /// or parsing the data into an integer.
@@ -78,6 +79,7 @@ pub trait VarRead: Read {
     }
 }
 
+/// A supertrait of `Write` which adds ready-made methods for writing VarInts and VarStrings
 pub trait VarWrite: Write {
     /// Attempts to write a VarInt, returning an error if there were issues with writing
     fn write_var_int<I: Integral>(&mut self, value: I) -> Result<(), VarError> {
